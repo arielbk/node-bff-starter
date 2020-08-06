@@ -1,5 +1,3 @@
-const path = require('path');
-
 exports.projectConfig = {
   name: 'seeus_v2',
   port: 8064,
@@ -28,7 +26,6 @@ exports.apiConfig = apiConfig;
 exports.poeditorConfig = {
   apiToken: '910744d28206a5b5e35cbb96e3f88140',
   projectId: '156331',
-  localesPath: path.resolve(`${path.dirname(__filename)}/locales`),
 };
 
 exports.debugMode = process.env.NODE_ENV !== 'production';

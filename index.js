@@ -10,7 +10,7 @@ app.use((req, res, next) => {
   return res.sendFile('index.html', { root });
 });
 
-// else proxy to backend
+// else route the request
 
 const port = process.env.PORT || 3333;
 app.listen(port);
