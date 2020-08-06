@@ -7,14 +7,11 @@ const httpClient = axios.create({
   timeout: 10000,
 });
 
+// log all outgoing requests
 httpClient.interceptors.request.use((req) => {
-  logger.info(
-    'Sending Request',
-    req.method,
-    req.url,
-    JSON.stringify(req.params),
-    JSON.stringify(req.data)
-  );
+  logger.info(`${req.method} request to ${req.url}
+  Params: ${req.params ? JSON.stringify(req.params) : ''},
+  Data: ${JSON.stringify(req.data)}`);
   return req;
 });
 

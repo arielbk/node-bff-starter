@@ -1,7 +1,9 @@
 const { apiConfig } = require('../config');
 const httpClient = require('../utilities/httpClient');
+const logger = require('../utilities/logger');
 
 exports.login = (req, res) => {
+  logger.info(JSON.stringify(req.body, null, 2));
   const credentials = {
     username: req.body.username,
     password: req.body.password,
