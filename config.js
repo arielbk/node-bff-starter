@@ -1,6 +1,17 @@
+// all project configuration should be defined here and imported where needed
+
 exports.projectConfig = {
   name: 'seeus_v2',
   port: 8064,
+
+  repo: 'git@github.com:swissinnovationlab/frontend_admin_seeus_v2.git',
+  server_path: '/var/www/seeus_v2',
+  servers: {
+    test: {
+      user: 'deploy',
+      host: '40.113.113.193',
+    },
+  },
 };
 
 const apiConfig = {
