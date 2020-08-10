@@ -12,7 +12,7 @@ const logger = require('./utilities/logger');
 const app = express();
 
 // helmet bundled security middleware
-app.use(helmet());
+// app.use(helmet());
 
 // gzip compress responses
 app.use(compression());
@@ -28,20 +28,25 @@ app.use(
   })
 );
 
-// serve frontend for non-api calls
-app.use((req, res, next) => {
-  if (req.path.startsWith('/api') || req.path.startsWith('/locales'))
-    return next();
-  const root = path.join(__dirname);
-  return res.sendFile('index.html', { root });
-});
-
-// parse incoming request body before it reaches middleware
-
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
+
+// serve frontend for non-api calls
+const root = path.join(__dirname, 'client', 'dist');
+app.use(express.static(root));
+app.use((req, res, next) => {
+  if (
+    req.method === 'GET' &&
+    req.accepts('html') &&
+    !req.is('json') &&
+    !req.path.startsWith('/api') &&
+    !req.path.startsWith('/locales')
+  ) {
+    res.sendFile('index.html', { root });
+  } else next();
+});
 
 // else route the request
 router(app);
